@@ -24,7 +24,31 @@ Good luck!
 
 ## Codebook
 
-Variables names:
+### run_analysis.R
+
+* Download file if it is not in the directory from **https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip**
+* Create results folder
+* Unzip file **UCI_HAR_Dataset.zip** if the directory don't exist
+* Define function **get_dataframe_from_file** to extract from a txt file its data.frame
+* Extract data from **features.txt**
+* Define a function **get_data** to tead the data from the named dataset
+  * Read **subject_data** file that contains **id**
+  * Read **y_data** file that contains **activity labels**
+  * Read **X_data** file that contains real data (as described in feature data)
+  * Combine by columns and return dataset
+* Define a function **write_data** to write data in results folder
+* Get test and train data and merge both datasets into **data**
+* Extracts only the measurements on the mean and standard deviation into **df_mean_and_std**
+* Get labels descriptions from **activity_labels.txt** and set them into **activity**
+* Write tidy data in a file **df_tidy.txt**
+
+
+### Variables names from test and train datasets:
+
+* test
+Contains 2947 observations with header and 563 variables.
+* train
+Contains 7352 observations with header and 563 variables.
 
 *  id	
 *  activity	
@@ -109,7 +133,9 @@ Variables names:
 *  fBodyBodyGyroJerkMag.meanFreq..
 
 
-df_tidy.txt:
+### df_tidy.txt:
+
+Contains 181 observations with header and 81 columns.
 
 *  id	
 *  activity	
