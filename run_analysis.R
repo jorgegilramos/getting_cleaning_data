@@ -16,8 +16,8 @@ data_file <- "UCI_HAR_Dataset.zip"
 
 # Download file if it is not in the directory 
 if (!file.exists(data_file)) {
-	cat("Downloading", data_file, "at", getwd(), "...\n")
-	download.file(url, data_file, method = "curl")
+  cat("Downloading", data_file, "at", getwd(), "...\n")
+  download.file(url, data_file, method = "curl")
 }
 
 # Create results folder
@@ -30,17 +30,17 @@ if (!file.exists(results_folder)) {
 # Unzip file if the directory don't exist (it is also packed in the zip file)
 data_folder <- "UCI HAR Dataset"
 if (!file.exists(data_folder)) {
-	cat("Unziping file", file, "at", paste(getwd(), "/", data_folder, sep = ""), "...\n")
-	unzip(file, list = FALSE, overwrite = TRUE)
+  cat("Unziping file", file, "at", paste(getwd(), "/", data_folder, sep = ""), "...\n")
+  unzip(file, list = FALSE, overwrite = TRUE)
 } 
 
 # Function to extract from a txt file its data.frame
 get_dataframe_from_file <- function (filename, column_names) {
   file_path <- paste(data_folder, filename, sep = "/")
   cat("Extracting dataframe from", filename, "...\n")
-	data <- data.frame()
+  data <- data.frame()
   data <- read.table(file_path, sep = "", stringsAsFactors = FALSE, col.names = column_names)
-	data
+  data
 }
 
 # Extract features.txt
@@ -48,19 +48,19 @@ features <- get_dataframe_from_file("features.txt", c("id", "column_names"))
 
 # Read the data from the named dataset (depends on the variable features, that has to be readed before).
 get_data <- function(dataset_name) {
-	cat("Getting data from", dataset_name, "...\n")
+  cat("Getting data from", dataset_name, "...\n")
   
   filename <- paste(dataset_name, "/", "subject_", dataset_name, ".txt", sep = "")
-	subject_data <- get_dataframe_from_file(filename, "id")
+  subject_data <- get_dataframe_from_file(filename, "id")
   
   filename <- paste(dataset_name, "/", "y_", dataset_name, ".txt", sep = "")
-	y_data <- get_dataframe_from_file(filename, "activity")
-	
+  y_data <- get_dataframe_from_file(filename, "activity")
+  
   filename <- paste(dataset_name, "/", "X_", dataset_name, ".txt", sep = "")
   X_data <- get_dataframe_from_file(filename, features$column_names)
   
-	data <- cbind(subject_data, y_data, X_data)
-	data
+  data <- cbind(subject_data, y_data, X_data)
+  data
 }
 
 # Write data in results_folder
